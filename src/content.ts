@@ -21,7 +21,7 @@ export const company = {
   shortName: 'Tiger',
   tagline: 'Fiberglass & Plastic · Production & Import',
   // Exactly as written by the owner (Tigrinya spelling).
-  nameLocal: 'ታይገር ፕፋይበር ፕላስቲክ ውጤቶች ኣምራች እና ኣስመጪ',
+  nameLocal: 'ታይገር የፋይበር  እና ፕላስቲክ ውጤቶች ኣምራች እና ኣስመጪ',
   nameLocalLang: 'ti',
 } as const;
 
