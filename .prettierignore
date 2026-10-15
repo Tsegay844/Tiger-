@@ -1,0 +1,12 @@
+dist
+dist-ssr
+node_modules
+package-lock.json
+Images from client
+*.jpg
+*.png
+*.webp
+_archive
+postman
+.postman
+*.txt
