@@ -5,7 +5,7 @@ export function Products() {
   return (
     <section className="section" id="products" aria-labelledby="products-title">
       <div className="container">
-        <div className="section-head reveal">
+        <div className="section-head section-head-wide reveal">
           <p className="eyebrow">Products</p>
           <h2 id="products-title">Three product lines, one point of contact.</h2>
           <p>

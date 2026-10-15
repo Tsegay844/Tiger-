@@ -9,10 +9,10 @@ export function Hero() {
       <div className="container hero-grid">
         <div className="hero-copy">
           <p className="eyebrow">{company.name}</p>
-          <h1 id="hero-title">Water tanks and fiberglass materials from one supplier.</h1>
+          <h1 id="hero-title">Get water tanks and fiberglass materials from us!</h1>
           <p className="hero-lead">
-            Tiger supplies fiberglass water tanks, plastic water tanks and fiberglass materials. Call or message us to
-            discuss sizes, quantities and availability.
+            Tiger is a producer and importer supplying fiberglass water tanks, plastic water tanks and fiberglass
+            materials from Addis Ababa and Mekelle. Call or message us to discuss sizes, quantities and availability.
           </p>
           <ContactActions message="Hello Tiger, I would like to make an enquiry." />
           <ul className="hero-list" aria-label="What we supply">
@@ -27,8 +27,8 @@ export function Hero() {
         <figure className="hero-media">
           <Picture image={images.tanks} sizes="(min-width: 900px) 50vw, 100vw" priority />
           <figcaption>
-            <span lang="am" className="amharic">
-              {company.nameAmharic}
+            <span lang={company.nameLocalLang} className="ethiopic">
+              {company.nameLocal}
             </span>
             <span>Tiger fiberglass water tanks</span>
           </figcaption>

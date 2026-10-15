@@ -1,6 +1,7 @@
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import { Root } from './Root';
 import '@fontsource-variable/archivo/wght.css';
+import '@fontsource-variable/playfair-display/wght-italic.css';
 import './styles.css';
 
 const root = document.getElementById('root');

@@ -4,7 +4,7 @@ export function Ordering() {
   return (
     <section className="section" id="ordering" aria-labelledby="ordering-title">
       <div className="container">
-        <div className="section-head reveal">
+        <div className="section-head section-head-wide reveal">
           <p className="eyebrow">How to order</p>
           <h2 id="ordering-title">A direct conversation, start to finish.</h2>
         </div>

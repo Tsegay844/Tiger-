@@ -8,7 +8,7 @@ export function Brand({ footer = false }: { footer?: boolean }) {
       </span>
       <span className="brand-copy">
         <strong>{company.shortName}</strong>
-        <small>Fiberglass &amp; Plastic Production</small>
+        <small>{company.tagline}</small>
       </span>
       <span className="visually-hidden">, back to top</span>
     </a>

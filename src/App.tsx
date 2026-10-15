@@ -1,11 +1,12 @@
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
+import { StructuredData } from './components/StructuredData';
 import { useReveal } from './hooks/useReveal';
 import { useSectionObserver } from './hooks/useSectionObserver';
 import { About } from './sections/About';
 import { Contact } from './sections/Contact';
 import { Hero } from './sections/Hero';
-import { Materials } from './sections/Materials';
+import { Importer } from './sections/Importer';
 import { Ordering } from './sections/Ordering';
 import { Products } from './sections/Products';
 
@@ -23,11 +24,12 @@ export function App() {
         <Hero />
         <About />
         <Products />
-        <Materials />
+        <Importer />
         <Ordering />
         <Contact />
       </main>
       <Footer />
+      <StructuredData />
     </>
   );
 }

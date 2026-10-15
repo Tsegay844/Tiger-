@@ -55,11 +55,11 @@ Tokens are defined on `:root` at the top of `src/styles.css`:
 
 ## Content rules
 
-All business facts come from the client's material: the company description message (English and Amharic, `Images from client/b0241187…jpg`) and the product photos. **Do not add** capacities, prices, delivery terms, addresses, certifications, statistics or testimonials until the client supplies them.
+All business facts come from the client's material: the company description message (English and Amharic, `Images from client/b0241187…jpg`), the product photos, and the contact details the client supplied (phone 0914 765 688, email, and the Addis Ababa and Mekelle addresses). **Do not add** capacities, prices, delivery terms, certifications, statistics or testimonials until the client supplies them.
 
-Contact details live in one place, `contact` in `src/content.ts`. The phone and WhatsApp links are generated from `phoneE164`.
+Contact details live in one place in `src/content.ts`: `contact` (phone, email) and `locations` (addresses in English plus the client's original Ethiopic text). The phone, WhatsApp and email links, the footer, and the schema.org `Organization` data (`src/components/StructuredData.tsx`) are all generated from these.
 
-There is no contact form. A static site has no backend, so enquiries go through tap-to-call and WhatsApp links. To add a form later, use a form service (e.g. Formspree, Netlify Forms) and never put secret keys in frontend code.
+There is no contact form. A static site has no backend, so enquiries go through tap-to-call, WhatsApp and email links. To add a form later, use a form service (e.g. Formspree, Netlify Forms) and never put secret keys in frontend code.
 
 ## Images
 

@@ -1,4 +1,4 @@
-import { company, contact, navigation } from '../content';
+import { company, contact, locations, navigation } from '../content';
 import { Brand } from './Brand';
 
 export function Footer() {
@@ -7,10 +7,10 @@ export function Footer() {
       <div className="container footer-grid">
         <div className="footer-intro">
           <Brand footer />
-          <p lang="am" className="amharic">
-            {company.nameAmharic}
+          <p lang={company.nameLocalLang} className="ethiopic">
+            {company.nameLocal}
           </p>
-          <p>Fiberglass water tanks, plastic water tanks and fiberglass materials.</p>
+          <p>Producer and importer of fiberglass and plastic products: water tanks and fiberglass materials.</p>
         </div>
         <nav aria-label="Footer">
           <h2 className="footer-heading">Explore</h2>
@@ -24,16 +24,22 @@ export function Footer() {
         </nav>
         <div>
           <h2 className="footer-heading">Contact</h2>
-          <ul>
-            <li>
-              <a href={contact.phoneHref}>{contact.phoneDisplay}</a>
-            </li>
-            <li>
-              <a href={contact.whatsappHref()} target="_blank" rel="noopener noreferrer">
-                WhatsApp<span className="visually-hidden"> (opens in a new tab)</span>
-              </a>
-            </li>
-          </ul>
+          <address className="footer-address">
+            <ul>
+              <li>
+                <a href={contact.phoneHref}>{contact.phoneDisplay}</a>
+              </li>
+              <li>
+                <a href={contact.whatsappHref()} target="_blank" rel="noopener noreferrer">
+                  WhatsApp<span className="visually-hidden"> (opens in a new tab)</span>
+                </a>
+              </li>
+              <li>
+                <a href={contact.emailHref}>{contact.email}</a>
+              </li>
+            </ul>
+            <p>{locations.map((location) => location.city).join(' · ')}</p>
+          </address>
         </div>
       </div>
       <div className="container footer-bottom">
