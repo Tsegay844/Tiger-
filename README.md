@@ -33,10 +33,3 @@ npm run preview   # optional: view the built site at http://localhost:4173
 
 ## 4. Deploy
 
-Upload everything inside `dist/` to any static web host:
-
-- **Netlify or Cloudflare Pages:** build command `npm run build`, publish folder `dist`
-- **Vercel:** framework preset "Vite", output folder `dist`
-- **cPanel, Apache or Nginx:** copy the contents of `dist/` into the web root (for example `public_html`)
-
-The site expects to sit at the root of a domain (`https://example.com/`). To host it in a sub-folder, set `base` in `vite.config.ts`. Once the domain is known, follow the comment in the `<head>` of `index.html`.
