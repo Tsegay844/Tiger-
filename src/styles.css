@@ -678,6 +678,61 @@ main:focus {
   }
 }
 
+/* Service promises (warranty, repair, delivery): a card along the bottom of the hero. */
+.service-list {
+  display: grid;
+  margin-top: clamp(2.5rem, 1.5rem + 3vw, 4rem);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  box-shadow: var(--shadow-sm);
+}
+.service-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+}
+.service-item + .service-item {
+  border-top: 1px solid var(--line);
+}
+.service-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 11px;
+  background: var(--blue-50);
+  color: var(--blue-700);
+}
+.service-icon .icon {
+  width: 24px;
+  height: 24px;
+}
+/* Top margin centres the title on the 44px icon tile. */
+.service-title {
+  margin-block: 0.625rem 0.25rem;
+  color: var(--ink);
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.service-item p:not(.service-title) {
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+@media (min-width: 1024px) {
+  .service-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .service-item + .service-item {
+    border-top: 0;
+    border-left: 1px solid var(--line);
+  }
+}
+
 /* ==========================================================================
    About
    ========================================================================== */
@@ -897,10 +952,16 @@ main:focus {
   color: var(--muted);
 }
 
+/* Two columns on tablets, four on desktop: no step is left alone on its own row. */
 @media (min-width: 760px) {
   .steps {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: clamp(1.5rem, 1rem + 2vw, 3rem);
+  }
+}
+@media (min-width: 1024px) {
+  .steps {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 

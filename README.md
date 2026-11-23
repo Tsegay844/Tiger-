@@ -55,7 +55,7 @@ Tokens are defined on `:root` at the top of `src/styles.css`:
 
 ## Content rules
 
-All business facts come from the client's material: the company description message (English and Amharic, `Images from client/b0241187…jpg`), the product photos, and the contact details the client supplied (phone 0914 765 688, email, and the Addis Ababa and Mekelle addresses). **Do not add** capacities, prices, delivery terms, certifications, statistics or testimonials until the client supplies them.
+All business facts come from the client's material: the company description message (English and Amharic, `Images from client/b0241187…jpg`), the product photos, the contact details the client supplied (phone 0914 765 688, email, and the Addis Ababa and Mekelle addresses), and the service terms the client sent in November 2026 (one-year warranty, free on-site repair, free delivery to any location; see `servicePromises` in `src/content.ts`). **Do not add** capacities, prices, certifications, statistics or testimonials until the client supplies them.
 
 Contact details live in one place in `src/content.ts`: `contact` (phone, email) and `locations` (addresses in English plus the client's original Ethiopic text). The phone, WhatsApp and email links, the footer, and the schema.org `Organization` data (`src/components/StructuredData.tsx`) are all generated from these.
 

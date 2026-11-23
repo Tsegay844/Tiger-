@@ -1,7 +1,7 @@
 import { ContactActions } from '../components/ContactActions';
 import { Icon } from '../components/Icon';
 import { Picture } from '../components/Picture';
-import { company, images, products } from '../content';
+import { company, images, products, servicePromises } from '../content';
 
 export function Hero() {
   return (
@@ -34,6 +34,19 @@ export function Hero() {
           </figcaption>
         </figure>
       </div>
+      <ul className="container service-list" aria-label="Warranty, repair and delivery">
+        {servicePromises.map((promise) => (
+          <li className="service-item" key={promise.title}>
+            <span className="service-icon">
+              <Icon name={promise.icon} />
+            </span>
+            <div>
+              <p className="service-title">{promise.title}</p>
+              <p>{promise.detail}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }

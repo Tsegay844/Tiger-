@@ -12,7 +12,7 @@ import type { ResponsiveImage } from './components/Picture';
 /*
  * All business facts below come from material supplied by the client:
  * the company description and contact details the owner provided (English + Ethiopic),
- * and the product photos.
+ * the service terms (warranty, repair, delivery) and the product photos.
  * Do not add claims here that the client has not confirmed.
  */
 
@@ -116,6 +116,32 @@ export const products: readonly Product[] = [
   },
 ];
 
+export type ServicePromise = { icon: IconName; title: string; detail: string };
+
+/*
+ * Service terms sent by the client in Tigrinya (November 2026). Confirmed with the client: they apply to all
+ * products, repairs are always free (not only during the warranty) and delivery is free to any location.
+ *   "warrenty ንዓመት በለሉ ፣ ናፃ ግልጋሎት ፅገና ናብ  ገዛ ወይ ትኻል ድርጅት ብኣኻል ተረኺብና ግልጋሎት ፅገና ንህብ ኢና።
+ *    ናፃ ግልጋሎት ትራንስፖርት(ናብ ዘደለይዎ) ነብፅሕ ኢና ።"
+ */
+export const servicePromises: readonly ServicePromise[] = [
+  {
+    icon: 'shield',
+    title: 'One-year warranty',
+    detail: 'Everything you buy from Tiger is covered by a one-year warranty.',
+  },
+  {
+    icon: 'wrench',
+    title: 'Free on-site repair',
+    detail: 'We come in person to your home, business or organization, and repairs are always free of charge.',
+  },
+  {
+    icon: 'truck',
+    title: 'Free delivery',
+    detail: 'We deliver your order free of charge to any location you choose.',
+  },
+];
+
 export const materialChecklist = [
   'The type of fiberglass material you need',
   'The quantity required',
@@ -129,6 +155,7 @@ export const orderSteps = [
   },
   { title: 'Tell us what you need', detail: 'The product, the capacity or quantity, and where it is needed.' },
   { title: 'Confirm the details', detail: 'We go over availability and the next steps with you directly.' },
+  { title: 'Receive your order', detail: 'We deliver it free of charge, wherever it is needed.' },
 ] as const;
 
 export const images = {
