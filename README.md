@@ -33,3 +33,4 @@ npm run preview   # optional: view the built site at http://localhost:4173
 
 ## 4. Deploy
 
+-Upload everything inside `dist/` to any static web host
