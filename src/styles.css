@@ -620,50 +620,6 @@ main:focus {
   font-weight: 500;
 }
 
-.hero-media {
-  position: relative;
-}
-.hero-media img {
-  width: 100%;
-  aspect-ratio: 960 / 719;
-  object-fit: cover;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow);
-}
-.hero-media::before {
-  content: '';
-  position: absolute;
-  inset: 12% -4% -5% 10%;
-  z-index: -1;
-  border-radius: var(--radius-lg);
-  background: var(--blue-50);
-}
-.hero-media figcaption {
-  display: grid;
-  gap: 2px;
-  margin-top: var(--space-2);
-  color: var(--muted);
-  font-size: var(--step--1);
-}
-.hero-media figcaption .ethiopic {
-  color: var(--ink);
-  font-weight: 600;
-  font-size: 0.9375rem;
-}
-
-@media (min-width: 600px) {
-  .hero-media figcaption {
-    position: absolute;
-    left: clamp(-1.5rem, -2vw, -0.75rem);
-    bottom: clamp(1rem, 3vw, 2rem);
-    max-width: 80%;
-    margin: 0;
-    padding: 0.875rem 1.125rem;
-    border-radius: var(--radius);
-    background: var(--paper);
-    box-shadow: var(--shadow);
-  }
-}
 @media (max-width: 599px) {
   .hero .button-row .button {
     flex: 1 1 100%;
@@ -673,8 +629,219 @@ main:focus {
   .hero-grid {
     grid-template-columns: 1.05fr 1fr;
   }
-  .hero-media figcaption {
-    left: -2rem;
+}
+
+/* Hero gallery. Slides move by native scroll snap, so swiping works without JavaScript; the controls
+   only appear once it runs. The stage is a one-cell grid so the controls can sit on top of the image. */
+.gallery {
+  min-width: 0;
+}
+.gallery-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+.gallery-stage > * {
+  grid-area: 1 / 1;
+}
+.gallery-track {
+  display: flex;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  border-radius: var(--radius-lg);
+  background: var(--blue-800);
+  box-shadow: var(--shadow);
+}
+.gallery-track::-webkit-scrollbar {
+  display: none;
+}
+/* `position` keeps each slide's visually hidden caption inside the scroller, not off the page edge. */
+.gallery-slide {
+  position: relative;
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+.gallery-slide img,
+.gallery-thumb img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: var(--focus, 50% 50%);
+}
+
+.gallery-button {
+  z-index: 1;
+  display: none;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.9);
+  color: var(--blue-800);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.js .gallery-button {
+  display: grid;
+}
+.gallery-button:hover {
+  background: #fff;
+}
+/* The bottom margin lifts the arrows clear of the caption card on short stages. */
+.gallery-prev {
+  align-self: center;
+  justify-self: start;
+  margin: 0 0 2rem 12px;
+}
+.gallery-next {
+  align-self: center;
+  justify-self: end;
+  margin: 0 12px 2rem 0;
+}
+.gallery-toggle {
+  align-self: start;
+  justify-self: end;
+  width: 40px;
+  height: 40px;
+  margin: 12px;
+}
+.gallery-toggle .icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Caption: below the image on phones, a card over its bottom-left corner from 600px. */
+.gallery-caption {
+  grid-area: 2 / 1;
+  display: grid;
+  gap: 2px;
+  margin-top: var(--space-2);
+  color: var(--muted);
+  font-size: var(--step--1);
+}
+.gallery-caption-title {
+  color: var(--ink);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .js .gallery-caption {
+    animation: gallery-caption-in 0.4s var(--ease);
+  }
+}
+@keyframes gallery-caption-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+/* Dots on phones, thumbnails from 600px. */
+.gallery-dots {
+  z-index: 1;
+  display: none;
+  align-self: end;
+  justify-self: center;
+  gap: 2px;
+  margin-bottom: 10px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: rgb(10 45 77 / 0.55);
+}
+.js .gallery-dots {
+  display: flex;
+}
+.gallery-dot {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.gallery-dot::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background: rgb(255 255 255 / 0.55);
+  transition:
+    width 0.2s var(--ease),
+    background-color 0.2s;
+}
+.gallery-dot[aria-current='true']::before {
+  width: 18px;
+  background: #fff;
+}
+.gallery-thumbs {
+  display: none;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+.gallery-thumb {
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--blue-800);
+  opacity: 0.65;
+  cursor: pointer;
+  transition:
+    opacity 0.2s,
+    border-color 0.2s;
+}
+.gallery-thumb:hover {
+  opacity: 1;
+}
+.gallery-thumb[aria-current='true'] {
+  border-color: var(--blue-700);
+  opacity: 1;
+}
+
+@media (min-width: 600px) {
+  .gallery-caption {
+    grid-area: 1 / 1;
+    z-index: 1;
+    align-self: end;
+    justify-self: start;
+    max-width: 80%;
+    margin: 0 0 clamp(1rem, 3vw, 2rem) clamp(-1.5rem, -2vw, -0.75rem);
+    padding: 0.875rem 1.125rem;
+    border-radius: var(--radius);
+    background: var(--paper);
+    box-shadow: var(--shadow);
+  }
+  .js .gallery-dots {
+    display: none;
+  }
+  .js .gallery-thumbs {
+    display: grid;
+  }
+}
+@media (min-width: 900px) {
+  .gallery-caption {
+    margin-left: -2rem;
+  }
+}
+/* Two-column layout on narrower screens: the stage is short, so a compact card leaves the image visible. */
+@media (min-width: 900px) and (max-width: 1199px) {
+  .gallery-caption {
+    max-width: 90%;
+    margin-bottom: 0.75rem;
+    padding: 0.625rem 0.875rem;
+    font-size: 0.8125rem;
+  }
+  .gallery-caption-title {
+    font-size: 0.875rem;
   }
 }
 

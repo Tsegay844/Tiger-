@@ -35,7 +35,7 @@ src/
   main.tsx                 Browser entry: hydrates prerendered HTML, loads font + styles
   entry-server.tsx         Build-time render entry
   sections/                Hero, About, Products, Materials, Ordering, Contact
-  components/              Header, Footer, Brand, ProductCard, ContactActions, Picture, Icon, ErrorBoundary
+  components/              Header, Footer, Brand, Gallery, ProductCard, ContactActions, Picture, Icon, ErrorBoundary
   hooks/                   Scroll reveal and active-section tracking
   state/UIContext.tsx      Mobile-menu and active-section state
   assets/images/           Optimised photos (WebP + JPEG, two widths each)
@@ -68,6 +68,12 @@ Originals stay untouched in `Images from client/`. To add an image:
 1. Export WebP (quality ~78) and JPEG versions at two widths into `src/assets/images/`, named descriptively.
 2. Import them in `src/content.ts` and add an entry to `images`, including real dimensions and alt text.
 3. Render with `<Picture image={…} sizes="…" />`. Pass `priority` only for the above-the-fold hero image.
+
+### Hero gallery
+
+The slideshow at the top of the page is built from `gallery` in `src/content.ts`. To add a slide, export a 16:9 image as `gallery-<name>-<width>.webp` and `.jpg` at widths 240, 640, 960 and 1280 into `src/assets/images/` (files with that name pattern are picked up automatically), then add an entry using `galleryImage('<name>', '<alt text>')` with a title and a one-line detail.
+
+Slides 2 to 6 were designed in Canva (design "Tiger Website Gallery"). Slides 3 to 6 use generic AI-generated images, not photos of Tiger products. Replace them with real photos when the client sends some.
 
 ## Deployment
 

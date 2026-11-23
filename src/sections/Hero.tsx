@@ -1,7 +1,7 @@
 import { ContactActions } from '../components/ContactActions';
+import { Gallery } from '../components/Gallery';
 import { Icon } from '../components/Icon';
-import { Picture } from '../components/Picture';
-import { company, images, products, servicePromises } from '../content';
+import { company, gallery, products, servicePromises } from '../content';
 
 export function Hero() {
   return (
@@ -24,15 +24,7 @@ export function Hero() {
             ))}
           </ul>
         </div>
-        <figure className="hero-media">
-          <Picture image={images.tanks} sizes="(min-width: 900px) 50vw, 100vw" priority />
-          <figcaption>
-            <span lang={company.nameLocalLang} className="ethiopic">
-              {company.nameLocal}
-            </span>
-            <span>Tiger fiberglass water tanks</span>
-          </figcaption>
-        </figure>
+        <Gallery slides={gallery} label="Tiger photo gallery" sizes="(min-width: 900px) 50vw, 100vw" />
       </div>
       <ul className="container service-list" aria-label="Warranty, repair and delivery">
         {servicePromises.map((promise) => (

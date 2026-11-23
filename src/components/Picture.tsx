@@ -14,9 +14,11 @@ type PictureProps = {
   /** Above-the-fold images load eagerly with high priority; everything else is lazy. */
   priority?: boolean;
   className?: string;
+  /** Overrides the image's alt text, e.g. "" when a labelled button already describes it. */
+  alt?: string;
 };
 
-export function Picture({ image, sizes, priority = false, className }: PictureProps) {
+export function Picture({ image, sizes, priority = false, className, alt = image.alt }: PictureProps) {
   const largest = image.sources[image.sources.length - 1];
   if (!largest) return null;
   const srcSet = (format: 'webp' | 'jpg') =>
@@ -31,7 +33,7 @@ export function Picture({ image, sizes, priority = false, className }: PicturePr
         sizes={sizes}
         width={image.width}
         height={image.height}
-        alt={image.alt}
+        alt={alt}
         loading={priority ? 'eager' : 'lazy'}
         fetchPriority={priority ? 'high' : 'auto'}
         decoding={priority ? 'sync' : 'async'}

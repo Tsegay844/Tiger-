@@ -2,6 +2,8 @@ import import480Jpg from './assets/images/fiberglass-import-container-480.jpg';
 import import480Webp from './assets/images/fiberglass-import-container-480.webp';
 import import960Jpg from './assets/images/fiberglass-import-container-960.jpg';
 import import960Webp from './assets/images/fiberglass-import-container-960.webp';
+import tanks240Jpg from './assets/images/tiger-fiberglass-water-tanks-240.jpg';
+import tanks240Webp from './assets/images/tiger-fiberglass-water-tanks-240.webp';
 import tanks640Jpg from './assets/images/tiger-fiberglass-water-tanks-640.jpg';
 import tanks640Webp from './assets/images/tiger-fiberglass-water-tanks-640.webp';
 import tanks960Jpg from './assets/images/tiger-fiberglass-water-tanks-960.jpg';
@@ -161,6 +163,7 @@ export const orderSteps = [
 export const images = {
   tanks: {
     sources: [
+      { width: 240, webp: tanks240Webp, jpg: tanks240Jpg },
       { width: 640, webp: tanks640Webp, jpg: tanks640Jpg },
       { width: 960, webp: tanks960Webp, jpg: tanks960Jpg },
     ],
@@ -180,3 +183,79 @@ export const images = {
     alt: 'An open shipping container on a truck, packed with large wrapped rolls of fiberglass material.',
   },
 } satisfies Record<string, ResponsiveImage>;
+
+// Gallery slide files are named gallery-<name>-<width>.webp|jpg (16:9) and picked up automatically.
+// `?no-inline` keeps Vite from embedding the small thumbnails in the JavaScript bundle.
+const galleryFiles = import.meta.glob<string>('./assets/images/gallery-*.{webp,jpg}', {
+  eager: true,
+  import: 'default',
+  query: '?no-inline',
+});
+const galleryWidths = [240, 640, 960, 1280] as const;
+
+function galleryImage(name: string, alt: string): ResponsiveImage {
+  const sources = galleryWidths.map((width) => {
+    const webp = galleryFiles[`./assets/images/gallery-${name}-${width}.webp`];
+    const jpg = galleryFiles[`./assets/images/gallery-${name}-${width}.jpg`];
+    if (!webp || !jpg) throw new Error(`Missing gallery image: gallery-${name}-${width}`);
+    return { width, webp, jpg };
+  });
+  return { sources, width: 1280, height: 720, alt };
+}
+
+export type GallerySlide = {
+  image: ResponsiveImage;
+  title: string;
+  detail: string;
+  /** Language of the title when it is not English (rendered in the Ethiopic font). */
+  titleLang?: string;
+  /** CSS object-position used to crop the image into the 16:9 frame; defaults to the centre. */
+  focus?: string;
+};
+
+/*
+ * Hero gallery. Slide 1 is the client's own photo; slides 2-6 were designed in Canva in the brand colours
+ * (Canva design "Tiger Website Gallery"). Slide 2 uses the client's container photo; slides 3-6 use generic
+ * AI-generated images, not photos of Tiger products. Replace them with real photos when the client sends some.
+ */
+export const gallery: readonly GallerySlide[] = [
+  {
+    image: images.tanks,
+    title: company.nameLocal,
+    titleLang: company.nameLocalLang,
+    detail: 'Tiger fiberglass water tanks',
+    // Keep the bottom of this 4:3 photo so the "Tiger Fiber Glass" stencil sits above the caption card.
+    focus: '50% 100%',
+  },
+  {
+    image: galleryImage(
+      'fiberglass-materials',
+      'An open shipping container on a truck, packed with large rolls of fiberglass material.',
+    ),
+    title: 'Fiberglass materials',
+    detail: 'Imported and supplied by Tiger',
+  },
+  {
+    image: galleryImage('plastic-water-tank', 'A green plastic water tank standing on a concrete base.'),
+    title: 'Plastic water tanks',
+    detail: 'For everyday water storage',
+  },
+  {
+    image: galleryImage('one-year-warranty', 'A blue and white shield with a check mark.'),
+    title: 'One-year warranty',
+    detail: 'On everything you buy from Tiger',
+  },
+  {
+    image: galleryImage(
+      'on-site-repair',
+      'A technician in blue overalls fixing the tap of a water tank outside a house.',
+    ),
+    title: 'Free on-site repair',
+    detail: 'At your home, business or organization',
+  },
+  {
+    image: galleryImage('free-delivery', 'A small truck carrying water tanks along a town road.'),
+    title: 'Free delivery',
+    detail: 'To any location you choose',
+  },
+];
